@@ -1,11 +1,24 @@
 from django.contrib import admin
 from .models import CustomUser, Profile
+from .forms import CustomUserCreationForm, CustomUserChangeForm
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+
 # Register your models here.
 
-@admin.register(CustomUser)
-class CustomUserAdmin(admin.ModelAdmin):
-    '''Admin View for CustomUser'''
 
+class CustomUserAdmin(BaseUserAdmin):
+    add_form = CustomUserCreationForm
+    form = CustomUserChangeForm
+    model = CustomUser
+    add_fieldsets = (
+        (None, {
+            'classes': ('wide',),
+            'fields': ('username','email', 'password1', 'password2')}
+        ),
+    )
+    list_display = ['email', 'username']
+    '''Admin View for CustomUser'''
+admin.site.register(CustomUser, CustomUserAdmin)
 
 
 @admin.register(Profile)

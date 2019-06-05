@@ -11,6 +11,19 @@ class Onboarding(models.Model):
     def __str__(self):
         return f'{self.newemployee}'
 
+    def last_name(self):
+        return self.newemployee.profile.last_name
+
+    def first_name(self):
+        return self.newemployee.profile.first_name
+
+    def tasks_to_complete(self):
+        return self.onboardingtasks_set.exclude(state='CM').count()
+
+    #later implement
+    def days_since_due(self):
+        pass
+
 
 class NewEmployee(models.Model):
     profile = models.OneToOneField('users.Profile',on_delete=models.CASCADE)
@@ -55,7 +68,7 @@ class OnboardingTasks(models.Model):
     onboarding = models.ForeignKey('Onboarding',on_delete=models.CASCADE)
     state = models.CharField(max_length=2,choices=STATE_CHOICES,default=OPEN)
     assigned_to = models.ForeignKey(get_user_model(),on_delete=models.CASCADE,related_name="assigned_tasks",blank=True,null=True)
-    last_updated = models.DateTimeField(null=True,blank=True)
+    last_updated = models.DateTimeField(auto_now=True)
     last_updated_by = models.ForeignKey(get_user_model(),on_delete=models.CASCADE,related_name="last_updated_tasks", null=True,blank=True) # moze all status changes in additional table
     date_due = models.DateField(null=True,blank=True)
     description = models.TextField(null=True,blank=True) # additional description added to task inheritance pattern with M2M and blueprint !!!

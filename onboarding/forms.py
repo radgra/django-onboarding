@@ -30,9 +30,21 @@ class OnboardingAdminForm(forms.ModelForm):
 
 
 class OnboardingTasksUpdateForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user')
+        return super().__init__(*args, **kwargs)
     class Meta:
         model = OnboardingTasks
         fields = ('state','assigned_to','date_due')
+
+    def clean_assigned_to(self):
+        data = self.cleaned_data['assigned_to']
+        return data
+
+    def clean_date_due(self):
+        data = self.cleaned_data['date_due']
+        return data
+
 
 # form for onboarding creation
 class ProfileForm(forms.ModelForm): 

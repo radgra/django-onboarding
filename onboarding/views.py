@@ -11,6 +11,8 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_http_methods
 from django.contrib import messages
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import permission_required
+from django.contrib.auth.decorators import user_passes_test
 
 # Create your views here.
 @login_required
@@ -20,6 +22,7 @@ def onboarding_list(request):
         'onboardings':onboardings
     }
     return render(request,'onboarding/onboarding_list.html',context)
+
 
 @login_required
 def onboarding_detail(request,pk):
@@ -43,10 +46,15 @@ def onboarding_detail(request,pk):
     }
     return render(request,'onboarding/onboarding_detail.html',context)
 
+
 @login_required
 def task_detail(request,pk_onboard, pk_task):
+    # diffrent view for non admin user
+    if not request.user.is_staff:
+        return task_detail_non_admin(request,pk_onboard, pk_task)
+
     onboarding_task = get_object_or_404(OnboardingTasks,onboarding=pk_onboard, task=pk_task)
-    form = OnboardingTasksUpdateForm(instance=onboarding_task)
+    form = OnboardingTasksUpdateForm(instance=onboarding_task,user=request.user)
     date_for_picker = None
 
     if onboarding_task.date_due:
@@ -57,19 +65,29 @@ def task_detail(request,pk_onboard, pk_task):
         'form':form,
         'date_for_picker':date_for_picker
     }
-    return render(request,'onboarding/task_detail.html',context)
+    return render(request,'onboarding/task_detail_staff.html',context)
+
+def task_detail_non_admin(request,pk_onboard, pk_task):
+    onboarding_task = get_object_or_404(OnboardingTasks,onboarding=pk_onboard, task=pk_task)
+    
+    return render(request,'onboarding/task_detail_user.html')
+
+
+
 
 @login_required
+@user_passes_test(lambda u: u.is_staff)
 def update_task_detail(request,pk_onboard, pk_task):
+    user = request.user
     onboarding_task = get_object_or_404(OnboardingTasks,onboarding=pk_onboard, task=pk_task)
     if request.method == 'POST':
-        form = OnboardingTasksUpdateForm(request.POST,instance=onboarding_task)
+        form = OnboardingTasksUpdateForm(request.POST,instance=onboarding_task, user=request.user)
         if form.is_valid():
             form.save()
     return redirect('onboarding:task_detail',pk_onboard=pk_onboard,pk_task=pk_task)
 
-
 @login_required
+@permission_required('onboarding.add_onboarding',raise_exception=True)
 def onboarding_create(request):
     if request.method == 'POST':
         form1 = OnboardingCreateForm(request.POST)
@@ -113,7 +131,8 @@ def onboarding_delete(request,pk):
     messages.success(request, 'Onboarding deleted!')
     return redirect('onboarding:onboarding_list')
 
-
+@login_required
+@permission_required('onboarding.add_onboarding',raise_exception=True)
 def onboarding_update(request,pk):
     onboarding = get_object_or_404(Onboarding,pk=pk)
     if request.method == 'POST':
