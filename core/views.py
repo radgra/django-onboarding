@@ -37,7 +37,7 @@ def main_page(request):
 
 def main_page_user(request):
     today = timezone.now()
-    tasks_due = OnboardingTasks.objects.filter(Q(date_due__gte=today) | Q(date_due=None),assigned_to=request.user)
+    tasks_due = OnboardingTasks.objects.filter(Q(date_due__gte=today) | Q(date_due=None),assigned_to=request.user).exclude(state=OnboardingTasks.COMPLETED)
     tasks_completed = OnboardingTasks.objects.filter(state=OnboardingTasks.COMPLETED, assigned_to=request.user).order_by('-date_due')[:10]
 
     context = {

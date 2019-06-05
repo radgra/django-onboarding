@@ -61,3 +61,9 @@ class NewEmployeeForm(forms.ModelForm):
     class Meta:
         model = NewEmployee
         fields = ('birth_date','personal_email')       
+
+
+class TaskUpdateUserForm(forms.ModelForm):
+    class Meta:
+        model = OnboardingTasks
+        fields = ('state',)

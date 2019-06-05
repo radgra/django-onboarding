@@ -3,7 +3,7 @@ from .models import Onboarding, OnboardingTasks
 from tasks.models import Task
 from django.shortcuts import get_object_or_404
 from .filters import OnboardingTasksFilter
-from .forms import OnboardingTasksUpdateForm, OnboardingCreateForm, NewEmployeeForm, ProfileForm
+from .forms import OnboardingTasksUpdateForm, OnboardingCreateForm, NewEmployeeForm, ProfileForm, TaskUpdateUserForm
 from django.utils.dateparse import parse_datetime
 from django.db import transaction
 from core.models import OnboardingTemplate
@@ -67,10 +67,21 @@ def task_detail(request,pk_onboard, pk_task):
     }
     return render(request,'onboarding/task_detail_staff.html',context)
 
+## non admin task_detail
 def task_detail_non_admin(request,pk_onboard, pk_task):
     onboarding_task = get_object_or_404(OnboardingTasks,onboarding=pk_onboard, task=pk_task)
-    
-    return render(request,'onboarding/task_detail_user.html')
+    if request.method == 'POST':
+        form = TaskUpdateUserForm(request.POST, instance=onboarding_task)
+        if form.is_valid():
+            form.save()
+            return redirect('core:main_page')
+    else:
+        form = TaskUpdateUserForm(instance=onboarding_task)
+    context = {
+        'o_task':onboarding_task,
+        'form':form
+    }
+    return render(request,'onboarding/task_detail_user.html',context)
 
 
 
