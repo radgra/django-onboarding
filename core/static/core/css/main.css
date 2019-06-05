@@ -1,0 +1,47 @@
+.navbar-spacer {
+    margin-top:20px;
+}
+
+.section-title {
+    margin-bottom:35px;
+}
+
+.detail-card-key {
+    font-weight: 500;
+    margin-right:5px;
+}
+
+.ml-2 {
+    margin-left:10px;
+}
+
+.c-pointer {
+    cursor: pointer;
+}
+
+.section-subtitle {
+    margin-top:0px;
+}
+
+.pseudo-form {
+    display:none;
+}
+
+
+.flex-title {
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#toast-container {
+    top: 80% !important;
+    right: 3% !important;
+    /* transform: translateX(50%) translateY(50%); */
+}
+
+.toast-success {
+    background-color: green;
+    color:white;
+    padding: 30px 50px;
+}

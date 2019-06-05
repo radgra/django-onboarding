@@ -1,0 +1,8 @@
+<script>
+        {% if messages %}
+            {% for message in messages %}
+            console.log('{{message}}')
+                M.toast({html:'{{ message }}', displayLength:2000, classes:"toast-{{message.tags}}"});
+            {% endfor %}
+        {% endif %}
+</script>

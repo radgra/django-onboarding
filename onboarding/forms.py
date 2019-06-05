@@ -1,0 +1,51 @@
+from django import forms
+from .models import Onboarding, OnboardingTasks, NewEmployee
+from core.models import OnboardingTemplate
+from users.models import Profile
+from django.contrib.auth import get_user_model
+
+
+class OnboardingAdminForm(forms.ModelForm):
+    """Form definition for Onboarding."""
+    template = forms.ModelChoiceField(queryset=OnboardingTemplate.objects.all(),empty_label="(Nothing)",required=False)
+
+
+    class Meta:
+        """Meta definition for Onboardingform."""
+
+        model = Onboarding
+        fields = ('entry_date','trial_period','template')
+    
+    def save(self, commit=True):
+        # print(self)
+        new_obj = super().save(commit=commit)
+        template = self.cleaned_data.get('template',None)
+        # if template:
+        #     # copy all tasks with position to taskstemplate
+        #     print(template)
+        #     for task_temp in template.templatetasks_set.all():
+        #        OnboardingTasks.create(task=task_temp.task,onbarding=new_obj,position=task_temp.position)
+        return new_obj
+
+
+
+class OnboardingTasksUpdateForm(forms.ModelForm):
+    class Meta:
+        model = OnboardingTasks
+        fields = ('state','assigned_to','date_due')
+
+# form for onboarding creation
+class ProfileForm(forms.ModelForm): 
+    class Meta:
+        model = Profile
+        fields = ('first_name','last_name','gender')
+
+class OnboardingCreateForm(forms.ModelForm):
+    class Meta:
+        model = Onboarding
+        fields = ('entry_date','trial_period')
+
+class NewEmployeeForm(forms.ModelForm):
+    class Meta:
+        model = NewEmployee
+        fields = ('birth_date','personal_email')       

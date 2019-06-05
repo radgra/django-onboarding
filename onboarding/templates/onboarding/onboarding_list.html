@@ -1,0 +1,40 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<div>
+    <a  href="{% url 'onboarding:onboarding_create' %}"
+        class="btn-floating btn-large waves-effect waves-light red right">
+        <i class="material-icons">add</i>
+    </a>
+    <h3 class="section-title">Oboardings</h3>
+
+</div>
+<div class="card">
+    <div class="card-content">
+
+        <table class="stripped highlight">
+            <thead>
+                <tr>
+                    <th>Entry Date</th>
+                    <th>Last Name</th>
+                    <th>First Name</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for onboarding in onboardings  %}
+                {% url 'onboarding:onboarding_detail' onboarding.id as target_url %}
+                <tr onclick="window.location='{{ target_url }}'" style="cursor:pointer;">
+                    <td>{{onboarding.entry_date}}</td>
+                    <td>{{onboarding.newemployee.profile.last_name}}</td>
+                    <td>{{onboarding.newemployee.profile.first_name}}</td>
+                    <td>{{onboarding.newemployee.profile.email}}</td>
+                </tr>
+                {% endfor %}
+                    
+            </tbody>
+        </table>
+    </div>
+
+</div>
+{% endblock content %}

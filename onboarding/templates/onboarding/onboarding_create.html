@@ -1,0 +1,159 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<form action="" method="POST">
+    {% csrf_token %}
+    <div class="card">
+        <div class="card-content">
+            <div class="card-title">
+                Employee Data
+            </div>
+            <div class="row">
+                <div class="col s6 input-field">
+                    <input id="first_name" type="text" class="validate" name="first_name" 
+                    {% if form3.first_name.value %}
+                    value="{{form3.first_name.value}}"
+                    {% endif %}
+                    >
+                    
+                    {% if form3.first_name.errors %}
+                    <span class="helper-text red-text">
+                        {{form3.first_name.errors.as_text}}
+                    </span>
+                    {% endif %}
+                        
+                    <label for="first_name">First Name</label>
+                </div>
+                <div class="col s6 input-field">
+                    <input id="last_name" type="text" class="validate" name="last_name" 
+                    {% if form3.first_name.value %}
+                    value="{{form3.last_name.value}}"
+                    {% endif %}
+                    >
+                    {% if form3.last_name.errors %}
+                    <span class="helper-text red-text">
+                        {{form3.last_name.errors.as_text}}
+                    </span>
+                    {% endif %}
+                    <label for="last_name">Last Name</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s3 input-field">
+                    <label>
+                        <input name="gender" type="radio" value="ML" 
+                        {% if form3.gender.value == "ML" %}
+                            checked
+                        {% endif %}
+                        />
+
+                        <span>Male</span>
+                    </label>
+                </div>
+                <div class="col s3 input-field">
+
+                    <label>
+                        <input name="gender" type="radio" value="FM" 
+                        {% if form3.gender.value == "FM" %}
+                            checked
+                        {% endif %}
+                        />
+                        <span>Female</span>
+                    </label>
+                </div>
+            </div>
+            {% if form3.gender.errors %}
+            <span class="helper-text red-text">
+                {{form3.gender.errors.as_text}}
+            </span>
+            {% endif %}
+            <div class="row">
+                <div class="col s6 input-field">
+                    <input id="personal_email" type="email" class="validate" name="personal_email" 
+                    {% if form2.personal_email.value %}
+                    value="{{form2.personal_email.value}}"
+                    {% endif %}
+                    >
+                    {% if form2.personal_email.errors %}
+                    <span class="helper-text red-text">
+                        {{form2.personal_email.errors.as_text}}
+                    </span>
+                    {% endif %}
+                    <label for="personal_email">Personal Email</label>
+                </div>
+                <div class="col s6 input-field">
+                    <input id="birth_date" class="validate" name="birth_date" 
+                    onfocus="(this.type = 'date')"
+                    onblur="handleBlur(this)"
+                    {% if form2.birth_date.value %}
+                    type="date"
+                    value="{{form2.birth_date.value}}"
+                    {% else %}
+                    type="text"
+                    {% endif %}
+                    >
+                    {% if form2.birth_date.errors %}
+                    <span class="helper-text red-text">
+                        {{form2.birth_date.errors.as_text}}
+                    </span>
+                    {% endif %}
+                    <label for="birth_date">Date of Birth</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- onfocus="(this.type = 'date')" -->
+    <div class="card">
+        <div class="card-content">
+            <div class="card-title">
+                Onboarding Data
+            </div>
+            <div class="row">
+                <div class="col s6 input-field">
+                    <input id="entry_date" class="validate" name="entry_date"
+                    onfocus="(this.type = 'date')"
+                    onblur="handleBlur(this)"
+                    {% if form1.entry_date.value %}
+                    type="date"
+                    value="{{form1.entry_date.value}}"
+                    {% else %}
+                    type="text"
+                    {% endif %}
+
+                    >
+                    {% if form1.entry_date.errors %}
+                    <span class="helper-text red-text">
+                        {{form1.entry_date.errors.as_text}}
+                    </span>
+                    {% endif %}
+                    <label for="entry_date">Entry Date</label>
+                </div>
+                <div class="col s6 input-field">
+                    <input id="trial_period" type="number" class="validate" name="trial_period" value="{{form1.trial_period.value}}" >
+                    {% if form1.trial_period.errors %}
+                    <span class="helper-text red-text">
+                        {{form1.trial_period.errors.as_text}}
+                    </span>
+                    {% endif %}
+                    <label for="trial_period">Trial Period</label>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <button class="waves-effect waves-light btn" type="submit">Submit</button>
+    </div>
+</form>
+{% endblock content %}
+
+{% block scripts %}
+<script>
+    function handleBlur(el) {
+        console.log(el)
+        if(!el.value) {
+            el.type = "text"
+        }
+    }
+</script>
+{% endblock scripts %}
