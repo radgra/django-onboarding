@@ -1,0 +1,30 @@
+<div class="card">
+    <div class="card-content">
+        <div class="card-title custom-card-title white-text brown darken-1 center-align">
+            Change Date Due
+        </div>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-wrapper">
+
+                <div class="input-field date-field" id="dateDueChangeContainer" 
+                {% if form_date_due.date_due.value %}
+                data-date={{form_date_due.date_due.value}}
+                {% endif %}
+                >
+                    <!-- <input type="text" class="datepicker pseudo-form" name="date_due"
+                        data-date="{{o_task.date_due | date:'Y-m-d'}}" id="dateInput"> -->
+                    <!-- <input type="text" class="datepicker" name="date_due" id="dateInfo"> -->
+
+                    {{form_date_due.date_due}}
+
+                <input name="form_type" value="3" type="hidden">
+                </div>
+            </div>
+            <div class="center-align">
+                <button class="waves-effect waves-light btn" type="submit" id="changeDateDueButton">Submit
+                    Change</button>
+            </div>
+        </form>
+    </div>
+</div>

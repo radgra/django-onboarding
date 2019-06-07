@@ -1,6 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,19 +10,36 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="{% static 'core/css/main.css' %}" rel="stylesheet">
+    <link href="{% static 'core/css/recently_updated_tasks.css' %}" rel="stylesheet">
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
 </head>
+
 <body>
     {% include 'core/partials/navbar.html' %}
-    <div class="container navbar-spacer">
+    <div id="slide-out" class="sidenav sidenav-fixed sidenav-custom">
+        <ul>
+            <li><a href="#!" class="custom-a">First Sidebar Link</a></li>
+            <li><a href="#!" class="custom-a">Second Sidebar Link</a></li>
+        </ul>
+    </div>
+    <a href="#" data-target="slide-out" class="sidenav-trigger show-on-large"><i class="material-icons">menu</i></a>
+    <div class="navbar-spacer">
         {% block content %}
         {% endblock content %}
     </div>
-    
-{% block scripts %}        
-{% endblock scripts %}  
-{% include 'core/partials/messages.html'%}    
+
+    {% block scripts %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('.sidenav');
+            var instances = M.Sidenav.init(elems, options);
+        });
+    </script>
+
+    {% endblock scripts %}
+    {% include 'core/partials/messages.html'%}
 </body>
+
 </html>

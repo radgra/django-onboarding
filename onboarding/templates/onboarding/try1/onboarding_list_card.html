@@ -1,0 +1,33 @@
+<div class="card">
+    <div class="card-content">
+        <div class="card-title custom-card-title blue text-white">
+            Task List
+        </div>
+        <table class="stripped highlight">
+            <thead>
+                <tr>
+                    <th>Entry Date</th>
+                    <th>Worker Name</th>
+                    <th>Birth Date</th>
+                    <th>Personal Email</th>
+                    <th>Trial Period</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for onboarding in onboardings  %}
+                {% url 'onboarding:onboarding_detail' onboarding.id as target_url %}
+                <tr onclick="window.location='{{ target_url }}'" style="cursor:pointer;">
+                    <td>{{onboarding.entry_date | date:"d/m/Y"}}</td>
+                    <td>{{onboarding.newemployee.profile.first_name}} {{onboarding.newemployee.profile.last_name}}</td>
+                    <td>{{onboarding.newemployee.birth_date | date:"d/m/Y"}}</td>
+                    <td>{{onboarding.newemployee.personal_email}}</td>
+                    <td>{{onboarding.trial_period}}</td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+
+</div>

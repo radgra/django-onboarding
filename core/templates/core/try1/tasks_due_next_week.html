@@ -1,0 +1,67 @@
+<div class="card">
+    <div class="card-content">
+        <span class="card-title custom-card-title blue">Tasks Due in Upcoming Week</span>
+        <table class="stripped highlight">
+            <!-- <thead>
+                <tr>
+
+                    <th>Onboarding</th>
+                    <th>Name</th>
+                    <th class="center-align"><i class="material-icons tooltipped" data-position="bottom"
+                            data-tooltip="Assigned To">person</i></th>
+                    <th class="center-align"><i class="material-icons tooltipped" data-position="bottom"
+                            data-tooltip="Category">device_hub</i></th>
+                    <th class="center-align"><i class="material-icons tooltipped" data-position="bottom"
+                            data-tooltip="Phase">check_box</i></th>
+                    <th class="center-align"><i class="material-icons tooltipped" data-position="bottom"
+                            data-tooltip="Date Due">date_range</i></th>
+                </tr>
+            </thead> -->
+
+            <tbody>
+                {% for task_onboard in tasks_due_week  %}
+                {% url 'onboarding:task_detail' task_onboard.onboarding.id task_onboard.task.id as target_url %}
+                <tr onclick="window.location='{{ target_url }}'" style="cursor:pointer;border:none">
+                    <td class="">
+                        <span>
+                            <span class="date-card-field">
+                                20 JUN
+                            </span>
+                            <p class="small-p">
+                                {{task_onboard.task.get_date_due_display}}
+                            </p>
+                        </span>
+                        <!-- <p>
+
+                            {% if task_onboard.date_due %}
+                            {{task_onboard.date_due}}
+                            {% else %}
+                            <i class="material-icons">highlight_off</i>
+                            {% endif %}
+                        </p> -->
+
+                    </td>
+                    <td>
+                        <span class="medium-text-card">
+                            {{task_onboard.onboarding.first_name}} {{task_onboard.onboarding.last_name}}
+                        </span>
+                        <p class="subtext">{{task_onboard.task.title}}</p>
+                        <p class="subtext">{{task_onboard.task.category.title}}</p>
+                    </td>
+                    <td class="center-align">
+                        {% if task_onboard.assigned_to  %}
+                        {{task_onboard.assigned_to}}
+
+                        {% else %}
+                        <span class="badge orange white-text">
+                            N.A.
+                        </span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>

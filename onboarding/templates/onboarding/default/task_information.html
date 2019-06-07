@@ -1,0 +1,47 @@
+<div class="card">
+        <div class="card-content">
+            <div class="card-title teal-text">
+                Task Information
+            </div>
+            <div class="row">
+                <div class="col s6">
+                    <div>
+                        <span class="detail-card-key">Title:</span>
+                        <span>{{o_task.task.title}}</span>
+                    </div>
+                    <div>
+                        <span class="detail-card-key">Position:</span>
+                        <span>{{o_task.position}}</span>
+                    </div>
+                    <div>
+                        <span class="detail-card-key">Assigned To:</span>
+                        <span>{{o_task.assigned_to}}</span>
+                    </div>
+                    <div>
+                        <span class="detail-card-key">Last Updated:</span>
+                        <span>{{o_task.last_updated}}</span>
+                    </div>
+
+                </div>
+                <div class="col s6">
+                    <div>
+                        <span class="detail-card-key">State:</span>
+                        <span>{{o_task.get_state_display}}</span>
+                    </div>
+                    <div>
+                        <span class="detail-card-key">Task Category:</span>
+                        <span>{{o_task.task.category}}</span>
+                    </div>
+                    <div>
+                        <span class="detail-card-key">Task Period:</span>
+                        <span>{{o_task.task.get_date_due_display}}</span>
+                    </div>
+                    <div>
+                        <span class="detail-card-key">Date Due:</span>
+                        <span>{{o_task.date_due}}</span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>

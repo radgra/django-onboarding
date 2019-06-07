@@ -1,0 +1,47 @@
+{% if paginated.paginator.num_pages > 1 %}
+<ul class="pagination">
+    {% if paginated.has_previous %}
+    <li class="waves-effect">
+        {% if query_field in request.get_full_path  %}
+        <a href="&page={{ paginated.previous_page_number }}">
+            <i class="material-icons">chevron_left</i>
+        </a>
+        {% else %}
+        <a href="?page={{ paginated.previous_page_number }}">
+                <i class="material-icons">chevron_left</i>
+        </a>
+        {% endif %}
+    </li>
+    {% endif %}
+
+    <!-- Main -->
+    {% for i in paginated.paginator.page_range  %}
+    {% if paginated.number == i %}
+    <li class="active"><a href="#">{{ i }}</a></li>
+    {% else %}
+    {% if query_field in request.get_full_path  %}
+    <li class="waves-effect">
+        <a href="{{ request.get_full_path }}&page={{ i }}">{{i}}</a>
+    </li>
+    {% else %}
+    <li><a href="?page={{ i }}">{{ i }}</a></li>
+    {% endif %}
+    {% endif %}
+    {% endfor %}
+
+    <!-- Next Page -->
+    {% if paginated.has_next %}
+    <li class="waves-effect">
+        {% if query_field in request.get_full_path  %}
+        <a href="&page={{ paginated.next_page_number }}">
+            <i class="material-icons">chevron_right</i>
+        </a>
+        {% else %}
+        <a href="?page={{ paginated.next_page_number }}">
+            <i class="material-icons">chevron_right</i>
+        </a>
+        {% endif %}
+    </li>
+    {% endif %}
+</ul>
+{% endif %}

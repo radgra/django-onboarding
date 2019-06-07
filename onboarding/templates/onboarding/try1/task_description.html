@@ -1,0 +1,18 @@
+<div class="card">
+    <div class="card-content">
+        <div class="card-title custom-card-title green darken-2 text-white">
+            Task Description
+        </div>
+        {% if o_task.task.description %}
+        <div>
+            {{o_task.task.description}}
+        </div>
+        {% else %}
+        <div class="center-align">
+            Not Available
+        </div>
+        {% endif %}
+        <div class="wrapper-detail">
+        </div>
+    </div>
+</div>

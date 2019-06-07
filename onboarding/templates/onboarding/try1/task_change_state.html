@@ -1,0 +1,22 @@
+<div class="card">
+    <div class="card-content">
+        <div class="card-title custom-card-title green darken-3 center-align">
+            Change State
+        </div>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-wrapper">
+                
+                <div class="input-field" id="stateChangeContainer">
+                    {{form_state.state}}
+                    {{form_state.state.label_tag}}
+                </div>
+            </div>
+            <input name="form_type" value="1" type="hidden">
+
+            <div class="center-align">
+                <button class="waves-effect waves-light btn" type="submit" id="changeStateButton">Submit Change</button>
+            </div>
+        </form>
+    </div>
+</div>

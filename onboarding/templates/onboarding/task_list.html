@@ -1,0 +1,27 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<div>
+    <h3 class="section-title">Tasks</h3>
+</div>
+{% include 'onboarding/default/task_list_card.html'%}
+{% endblock %}
+
+{% block scripts %}
+<script>
+
+    document.addEventListener('DOMContentLoaded', function () {
+        console.log('working')
+        var elems = document.querySelectorAll('select');
+        var instances = M.FormSelect.init(elems);
+
+        var elems = document.querySelectorAll('.tooltipped');
+        var instances = M.Tooltip.init(elems);
+
+        var dateInputs = document.querySelectorAll('div.date-field > input')
+        //var instancePicker = M.Datepicker.init(dateInputs, { format: "yyyy-mm-dd"});
+        var instancePicker = M.Datepicker.init(dateInputs);
+
+    
+    });
+</script>
+{% endblock scripts %}

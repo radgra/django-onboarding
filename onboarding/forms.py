@@ -63,7 +63,19 @@ class NewEmployeeForm(forms.ModelForm):
         fields = ('birth_date','personal_email')       
 
 
-class TaskUpdateUserForm(forms.ModelForm):
+class TaskUpdateStateForm(forms.ModelForm):
     class Meta:
         model = OnboardingTasks
         fields = ('state',)
+
+
+class TaskUpdateDateDueForm(forms.ModelForm):
+    # date_due = forms.DateField(input_formats=['%d %b %Y','%Y-%m-%d'])
+    class Meta:
+        model = OnboardingTasks
+        fields = ('date_due',)
+
+class TaskAssignPersonForm(forms.ModelForm):
+    class Meta:
+        model = OnboardingTasks
+        fields = ('assigned_to',)

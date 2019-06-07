@@ -1,9 +1,14 @@
 .navbar-spacer {
     margin-top:20px;
+    padding-left: 340px;
+    padding-right: 45px;
 }
 
 .section-title {
     margin-bottom:35px;
+    font-weight: 800;
+    color: #484848;
+    padding:0 0.75rem;
 }
 
 .detail-card-key {
@@ -44,4 +49,19 @@
     background-color: green;
     color:white;
     padding: 30px 50px;
+}
+
+body {
+    background-color:#f1f1f1;
+}
+
+.section-subtitle {
+    margin-top:-25px;
+    padding:0 0.75rem;
+    margin-bottom:25px;
+    color: #808080;
+}
+
+td.align-left, th.align-left {
+    text-align: left !important;
 }

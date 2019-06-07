@@ -6,176 +6,33 @@
         <h3 class="section-title">{{onboarding.newemployee.profile.fullname}}</h3>
     </div>
     <div class="flex-title">
-        <a href="{% url 'onboarding:onboarding_update' onboarding.id %}" class="btn-floating white lighten-5">
-            <i class="material-icons green-text" data-position="bottom">edit</i>
+        <a href="{% url 'onboarding:onboarding_update' onboarding.id %}"
+            class="btn-floating btn-large waves-effect waves-light orange darken-2 right">
+            <i class="material-icons">edit</i>
         </a>
         <form action="{% url 'onboarding:onboarding_delete' onboarding.id %}" method="POST" class="ml-2">
             {% csrf_token %}
-            <button type="submit" class="btn-floating white lighten-5">
-                <i class="material-icons red-text" data-position="bottom">delete</i>
+            <button type="submit" class="btn-floating btn-large waves-effect waves-light red darken-1 right">
+                <i class="material-icons white-text" data-position="bottom">delete</i>
             </button>
         </form>
 
     </div>
 </div>
 <div class="row">
-    <div class="col s6">
+    <div class="col s7">
 
-        <div class="card">
-            <div class="card-content">
-                <div class="card-title teal-text">
-                    Personal Info
-                </div>
-                <div>
-                    <div>
-                        <span class="detail-card-key">First
-                            Name:</span><span>{{onboarding.newemployee.profile.first_name}}</span>
-                    </div>
-                    <div>
-                        <span class="detail-card-key">Last
-                            Name:</span><span>{{onboarding.newemployee.profile.last_name}}</span>
-                    </div>
-                    <div>
-                        <span class="detail-card-key">Gender
-                        </span><span>{{onboarding.newemployee.profile.get_gender_display}}</span>
-                    </div>
-                    <div>
-                        <span class="detail-card-key">Date of
-                            Birth:</span><span>{{onboarding.newemployee.birth_date}}</span>
-                    </div>
-                    <div>
-                        <span class="detail-card-key">Personal
-                            Email:</span><span>{{onboarding.newemployee.personal_email}}</span>
-                    </div>
-                    <div>
-                        <span class="detail-card-key">Work
-                            Email:</span><span>{{onboarding.newemployee.profile.email}}</span>
-                    </div>
-                </div>
-            </div>
-        </div>
+        {% include 'onboarding/try1/personal_info.html' %}
     </div>
-    <div class="col s6">
+    <div class="col s5">
 
-        <div class="card">
-            <div class="card-content">
-                <div class="card-title red-text">
-                    Onboarding Info
-                </div>
-                <div>
-                    <div>
-                        <span class="detail-card-key">Entry Date:</span><span>{{onboarding.entry_date}}</span>
-                    </div>
-                    <div>
-                        <span class="detail-card-key">Trial Period:</span><span>{{onboarding.trial_period}} weeks</span>
-                    </div>
-                </div>
-            </div>
-        </div>
+        {% include 'onboarding/try1/onboarding_info.html' %}
+
     </div>
 </div>
 <div class="row">
     <div class="col s12">
-        <div class="card">
-            <div class="card-content">
-                <div class="card-title">
-                    Tasks
-                    <!-- <button class="waves-effect waves-light btn right">Apply Filters</button> -->
-                </div>
-                <div class="row">
-                    <form method="GET">
-
-                        <div class="input-field col s3">
-                            {{ filter.form.state }}
-                            {{ filter.form.state.label_tag }}
-                        </div>
-                        <div class="input-field col s3">
-                            {{ filter.form.task__date_due }}
-                            {{ filter.form.task__date_due.label_tag }}
-                        </div>
-                        <div class="input-field col s3">
-                            {{ filter.form.assigned_to }}
-                            {{ filter.form.assigned_to.label_tag }}
-                        </div>
-                        <div class="input-field col s3">
-
-                            {{ filter.form.task__category }}
-                            {{ filter.form.task__category.label_tag }}
-
-                        </div>
-                        <button class="waves-effect waves-light btn right" type="submit">Apply Filters</button>
-                    </form>
-                </div>
-                <table class="stripped highlight">
-                    <thead>
-                        <tr>
-                            <th class="center-align">Pos.</th>
-                            <th>Name</th>
-                            <th class="center-align"><i class="material-icons tooltipped" data-position="bottom"
-                                    data-tooltip="Assigned To">person</i></th>
-                            <th class="center-align"><i class="material-icons tooltipped" data-position="bottom"
-                                    data-tooltip="Category">device_hub</i></th>
-                            <th class="center-align"><i class="material-icons tooltipped" data-position="bottom"
-                                    data-tooltip="Phase">check_box</i></th>
-                            <th class="center-align"><i class="material-icons tooltipped" data-position="bottom"
-                                    data-tooltip="Date Due">date_range</i></th>
-                            <!-- <th class="center-align"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Actions">more_vert</i></th> -->
-                        </tr>
-                    </thead>
-
-                    <tbody>
-
-                        {% for task_onboard in paginated  %}
-                        {% class_for_state task_onboard as the_class %}
-                        {% url 'onboarding:task_detail' task_onboard.onboarding.id task_onboard.task.id as target_url %}
-                        <tr onclick="window.location='{{ target_url }}'" style="cursor:pointer;" class="{{the_class}}">
-                            <td class="center-align">{{task_onboard.position}}</td>
-                            <td>{{task_onboard.task.title}}</td>
-                            <td class="center-align">
-                                {% if task_onboard.assigned_to  %}
-                                {{task_onboard.assigned_to}}
-
-                                {% else %}
-                                <i class="material-icons red-text">highlight_off</i>
-                                {% endif %}
-                            </td>
-                            <td class="center-align">{{task_onboard.task.category.title}}</td>
-                            <td class="center-align">
-                                {{task_onboard.task.get_date_due_display}}</td>
-                            <td class="center-align">
-
-                                {% if task_onboard.date_due %}
-                                {{task_onboard.date_due}}
-                                {% else %}
-                                <i class="material-icons">highlight_off</i>
-                                {% endif %}
-
-                            </td>
-                        </tr>
-                        {% endfor %}
-
-                    </tbody>
-                </table>
-                <ul class="pagination">
-                    {% if paginated.has_previous %}
-                    <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-                    {% endif %}
-                    
-                    {% for i in paginated.paginator.page_range  %}                 
-                    {% if 'state' in request.get_full_path  %}
-                    <li class="waves-effect"><a href="{{ request.get_full_path }}&page={{ i }}">{{i}}</a></li>
-                    {% else %}
-                    <li><a href="?page={{ i }}">{{ i }}</a></li>
-                    {% endif %}
-                        
-                    
-                    {% endfor %}
-                    {% if paginated.has_next %}
-                    <li class="waves-effect"><a href="?page={{ paginated.next_page_number }}"><i class="material-icons">chevron_right</i></a></li>
-                    {% endif %}
-                </ul>
-            </div>
-        </div>
+        {% include 'onboarding/try1/tasks_onboarding_card.html' %}
     </div>
 </div>
 {% endblock content %}

@@ -1,0 +1,57 @@
+<div class="card">
+    <div class="card-content">
+        <div class="card-title custom-card-title blue text-white">
+            Personal Info
+        </div>
+        <div class="wrapper-detail">
+            <div class="row detail-row">
+                <div class="col s4">
+                    <span class="detail-title grey-text text-darken-2">FIRST NAME</span>
+                </div>
+                <div class="col s8">
+                    <span class="grey-text text-darken-1">{{onboarding.newemployee.profile.first_name}}</span>
+                </div>
+            </div>
+            <div class="row detail-row">
+                <div class="col s4">
+                    <span class="detail-title grey-text text-darken-2">LAST NAME</span>
+                </div>
+                <div class="col s8">
+                    <span class="grey-text text-darken-1">{{onboarding.newemployee.profile.last_name}}</span>
+                </div>
+            </div>
+            <div class="row detail-row">
+                <div class="col s4">
+                    <span class="detail-title grey-text text-darken-2">GENDER</span>
+                </div>
+                <div class="col s8">
+                    <span class="grey-text text-darken-1">{{onboarding.newemployee.profile.get_gender_display}}</span>
+                </div>
+            </div>
+            <div class="row detail-row">
+                <div class="col s4">
+                    <span class="detail-title grey-text text-darken-2">DATE OF BIRTH</span>
+                </div>
+                <div class="col s8">
+                    <span class="grey-text text-darken-1">{{onboarding.newemployee.birth_date | date:"d M Y"}}</span>
+                </div>
+            </div>
+            <div class="row detail-row">
+                <div class="col s4">
+                    <span class="detail-title grey-text text-darken-2">PERSONAL EMAIL</span>
+                </div>
+                <div class="col s8">
+                    <span class="grey-text text-darken-1">{{onboarding.newemployee.personal_email}}</span>
+                </div>
+            </div>
+            <div class="row detail-row">
+                <div class="col s4">
+                    <span class="detail-title grey-text text-darken-2">WORK EMAIL</span>
+                </div>
+                <div class="col s8">
+                    <span class="grey-text text-darken-1">{{onboarding.newemployee.profile.email}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

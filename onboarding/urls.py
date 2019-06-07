@@ -10,6 +10,7 @@ urlpatterns = [
     path('<int:pk>/delete',views.onboarding_delete,name='onboarding_delete'),
     path('<int:pk>/update',views.onboarding_update,name='onboarding_update'),
     path('create/',views.onboarding_create,name='onboarding_create'),
+    path('tasks/',views.task_list,name='task_list'),
 
 
 ]

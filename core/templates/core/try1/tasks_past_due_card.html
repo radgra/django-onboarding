@@ -1,0 +1,48 @@
+<div class="card">
+    <div class="card-content">
+        <span class="card-title custom-card-title red">Tasks Past Due</span>
+        <table class="stripped highlight centered">
+            <thead>
+                <tr>
+                    <th class="align-left">Onboarding</th>
+                    <th>Assigned</th>
+                    <th>Overdue</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for task_onboard in past_due_tasks  %}
+                {% url 'onboarding:task_detail' task_onboard.onboarding.id task_onboard.task.id as target_url %}
+                <tr onclick="window.location='{{ target_url }}'" style="cursor:pointer;">
+                    <td class="align-left">
+                        <span class="subtext">
+                            {{task_onboard.onboarding.first_name}} {{task_onboard.onboarding.last_name}}
+                        </span>
+                        <p class="font-bold">
+                            {{task_onboard.task.title}}
+                        </p>
+                    </td>
+                    <td class="">
+                        {% if task_onboard.assigned_to  %}
+                        {{task_onboard.assigned_to}}
+
+                        {% else %}
+                        <span class="badge orange white-text">
+                            N.A.
+                        </span>
+                        {% endif %}
+                    </td>
+                    <td class="">
+
+                        {% if task_onboard.date_due %}
+                        {{task_onboard.date_due | timesince}}
+                        {% else %}
+                        <i class="material-icons">highlight_off</i>
+                        {% endif %}
+
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

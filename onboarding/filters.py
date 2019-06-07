@@ -20,3 +20,15 @@ class OnboardingTasksFilter(django_filters.FilterSet):
         fields = ['assigned_to','task__category','task__date_due']
     
     
+
+class TaskDetailFilter(django_filters.FilterSet):
+      class Meta:
+        model = OnboardingTasks
+        #fields = ['assigned_to','date_due','state','task__title']
+        fields = {
+            'assigned_to':['exact',],
+            'date_due':['lt','gt'],
+            'state':['exact',],
+            'task__title':['icontains',],
+            'onboarding':['exact',]
+            }

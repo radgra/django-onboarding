@@ -1,144 +1,48 @@
 {% extends 'core/base.html' %}
 
 {% block content %}
-<div>
-    <a href="{% url 'onboarding:onboarding_detail' o_task.onboarding.id %}">
-            <i class="material-icons teal-text">arrow_back</i>
-    </a>
-</div>
-<div class="section-title">
-    <h4>{{o_task.task.title}}</h4>
-    <h6 class="section-subtitle teal-text">{{o_task.onboarding.newemployee.profile.fullname}}</h6>
-</div>
-<form action="{% url 'onboarding:task_detail_update' o_task.onboarding.id o_task.task.id  %}" method="post" id="changeForm"
-    class="pseudo-form">
-    {% csrf_token %}
-    {{form}}
-</form>
-<div class="row">
-    <div class="col s12">
-        <div class="card">
-            <div class="card-content">
-                <div class="card-title teal-text">
-                    Change State
-                </div>
-                <div>
 
-                    <div class="input-field" id="stateChangeContainer">
-                        {{form.state}}
-                        {{form.state.label_tag}}
-                    </div>
-                    <div>
-                        <button class="waves-effect waves-light btn" type="Button"
-                            id="changeStateButton">Submit</button>
-                    </div>
-                </div>
+<div class="flex-title">
+    <div class="title-text">
+        <h3 class="section-title">{{o_task.task.title}}</h3>
+        <h5 class="section-subtitle">{{o_task.onboarding.newemployee.profile.fullname}}</h5>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col s9">
+        <div class="row">
+            <div class="col s12">
+                {% include 'onboarding/try1/task_information.html' %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                {% include 'onboarding/try1/task_description.html' %}
+            </div>
+        </div>
+    </div>
+    <div class="col s3">
+        <div class="row">
+            <div class="col s12">
+                {% include 'onboarding/try1/task_change_state.html' %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                {% include 'onboarding/try1/task_assign_person.html' %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                {% include 'onboarding/try1/task_assign_date.html' %}
             </div>
         </div>
     </div>
 </div>
-</form>
-<div class="row">
-    <div class="col s12">
-        <div class="card">
-            <div class="card-content">
-                <div class="card-title teal-text">
-                    Assign Person
-                </div>
-                <div>
 
-                    <div class="input-field" id="assignedToChangeContainer">
-                        {{form.assigned_to}}
-                        {{form.assigned_to.label_tag}}
-                    </div>
-                    <div>
-                        <button class="waves-effect waves-light btn" type="Button"
-                            id="changeAssignedToButton">Submit</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col s12">
-        <div class="card">
-            <div class="card-content">
-                <div class="card-title teal-text">
-                    Date Due
-                </div>
-                <div>
 
-                    <div class="input-field" id="dateDueChangeContainer">
-                        <input type="text" class="datepicker pseudo-form" name="date_due"
-                            data-date="{{o_task.date_due | date:'Y-m-d'}}" id="dateInput">
-                        <i class="material-icons orange-text c-pointer tooltipped" data-position="bottom"
-                            data-tooltip="Edit" id="datePickerOpener">edit</i>
-                        <!-- {{form.date_due.label_tag}} -->
-                        <span id="dateInfo">
-                            {{o_task.date_due}}
-                        </span>
-                    </div>
-                    <div>
-                        <button class="waves-effect waves-light btn" type="Button"
-                            id="changeDateDueButton">Submit</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col s12">
-        <div class="card">
-            <div class="card-content">
-                <div class="card-title teal-text">
-                    Task Information
-                </div>
-                <div class="row">
-                    <div class="col s6">
-                        <div>
-                            <span class="detail-card-key">Title:</span>
-                            <span>{{o_task.task.title}}</span>
-                        </div>
-                        <div>
-                            <span class="detail-card-key">Position:</span>
-                            <span>{{o_task.position}}</span>
-                        </div>
-                        <div>
-                            <span class="detail-card-key">Assigned To:</span>
-                            <span>{{o_task.assigned_to}}</span>
-                        </div>
-                        <div>
-                            <span class="detail-card-key">Last Updated:</span>
-                            <span>{{o_task.last_updated}}</span>
-                        </div>
 
-                    </div>
-                    <div class="col s6">
-                        <div>
-                            <span class="detail-card-key">State:</span>
-                            <span>{{o_task.get_state_display}}</span>
-                        </div>
-                        <div>
-                            <span class="detail-card-key">Task Category:</span>
-                            <span>{{o_task.task.category}}</span>
-                        </div>
-                        <div>
-                            <span class="detail-card-key">Task Period:</span>
-                            <span>{{o_task.task.get_date_due_display}}</span>
-                        </div>
-                        <div>
-                            <span class="detail-card-key">Date Due:</span>
-                            <span>{{o_task.date_due}}</span>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 {% endblock content %}
 
 {% block scripts %}
@@ -149,51 +53,15 @@
 
         var elemsPicker = document.querySelector('.datepicker');
 
-        const changeForm = document.querySelector('#changeForm')
-        const stateInputValue = changeForm.querySelector("[name='state']")
-        const assignedToInputValue = changeForm.querySelector("[name='assigned_to']")
-        const dateDueInputValue = changeForm.querySelector("[name='date_due']")
+        var dateInputs = document.querySelectorAll('div.date-field > input')
+        //var instancePicker = M.Datepicker.init(dateInputs, { format: "yyyy-mm-dd"});
+        var instancePicker = M.Datepicker.init(dateInputs);
+        var startingDate = document.querySelector('#dateDueChangeContainer').getAttribute('data-date')
 
-        var instancePicker = M.Datepicker.init(elemsPicker, { format: "mmm,dd,yyyy",onSelect:selectPickerHandler });
-
-        const dataDate = document.querySelector('#dateInput').dataset.date
-
-        instancePicker.setDate(new Date(dataDate))
-        const datePickerOpener = document.querySelector('#datePickerOpener')
-        datePickerOpener.addEventListener('click', e => {
-            instancePicker.open()
-        })
-     
-
-        
-
-
-        const changeStateButton = document.querySelector('#changeStateButton')
-        const changeAssignedToButton = document.querySelector('#changeAssignedToButton')
-        const changeDateDueButton = document.querySelector('#changeDateDueButton')
-
-        function selectPickerHandler(date){
-            let newDate = moment(date)
-            dateDueInputValue.value = newDate.format("YYYY-MM-DD")
-            document.querySelector('#dateInfo').textContent = newDate.format("MMM Do YYYY")
+        if(startingDate) {
+            var momentDate = moment(startingDate).format('MMM D, YYYY')
+            document.querySelector('#id_date_due').value = momentDate
         }
-
-
-        changeStateButton.addEventListener('click', e => {
-            const value = document.querySelector("#stateChangeContainer select[name='state']").value
-            stateInputValue.value = value
-            changeForm.submit()
-        })
-
-        changeAssignedToButton.addEventListener('click', e => {
-            const value = document.querySelector("#assignedToChangeContainer select[name='assigned_to']").value
-            assignedToInputValue.value = value
-            changeForm.submit()
-        })
-
-        changeDateDueButton.addEventListener('click', e => {
-            changeForm.submit()
-        })
 
 
 

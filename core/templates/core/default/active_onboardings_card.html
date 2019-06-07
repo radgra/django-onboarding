@@ -1,0 +1,33 @@
+<div class="card">
+    <div class="card-content">
+        <span class="card-title custom-card-title orange">Active Onboardings</span>
+        <table class="stripped highlight centered">
+            <thead>
+                <tr>
+                    <th>Entry Date</th>
+                    <th>Name</th>
+                    <th>Tasks to complete</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for onboarding in active_onboardings  %}
+                {% url 'onboarding:onboarding_detail' onboarding.id as target_url %}
+                <tr onclick="window.location='{{ target_url }}'" style="cursor:pointer;">
+                    <td>
+                        <span>
+                            {{onboarding.entry_date | date:"M d"}}
+                        </span>
+
+
+                    </td>
+                    <td>{{onboarding.first_name}} {{onboarding.last_name}}</td>
+                    <td>{{onboarding.tasks_to_complete}}</td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+
+</div>

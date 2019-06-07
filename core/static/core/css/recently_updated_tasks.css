@@ -1,0 +1,117 @@
+.email {
+    font-size: 12px;
+    color:#989898;
+}
+.name-span {
+    color: #0a54c7;
+    font-weight: 600;
+}
+
+.person-field {
+    font-weight: 500;
+    color: #6d6d6d;
+}
+
+.card-content {
+    padding:40px !important;
+}
+
+
+.date-card-field {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.small-p {
+    font-size:14px;
+}
+
+.medium-text-card {
+    font-size:20px;
+
+}
+
+.subtext {
+    font-size: 14px;
+    color: #929292;
+}
+
+.font-bold {
+    font-weight: 600;
+}
+
+.custom-card-title {
+    /* font-weight:400 !important; */
+    color:white;
+    padding:10px;
+    margin-bottom:20px !important;
+}
+.date-card h1 {
+    margin:0px;
+}
+.date-card {
+    padding:40px 0px;
+    text-align: center;
+}
+
+.big-icon {
+    font-size:50px;
+}
+
+
+.form-wrapper {
+    margin-top: 40px;
+    margin-bottom: 30px;
+}
+
+.detail-title {
+    font-weight: 600;
+}
+
+.wrapper-detail {
+    padding:0px 20px;
+    margin-top:30px;
+}
+
+.detail-row {
+    border-bottom: 1px solid #e6e6e6;
+    padding-bottom: 15px;
+}
+
+.bold-text {
+    font-weight:800;
+}
+
+.pag-marg {
+    margin-top: 40px;
+}
+
+span.badge-custom {
+    margin-left:0px;
+    float:none;
+}
+
+.filter-button {
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.m-40 {
+    margin-top:40px;
+}
+
+.m-20 {
+    margin-top:20px;
+}
+
+.m-60 {
+    margin-bottom: 60px;
+}
+
+.sidenav-custom {
+    background-color: #2f3e46;
+}
+
+.sidenav li>a.custom-a {
+    color:white;
+}
