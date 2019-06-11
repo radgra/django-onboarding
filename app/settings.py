@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'django_filters',
+    'easy_thumbnails',
+    'image_cropping',
 ]
 
 MIDDLEWARE = [
@@ -129,3 +131,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = 'media'
+
+
+from easy_thumbnails.conf import Settings as thumbnail_settings
+THUMBNAIL_PROCESSORS = (
+    'image_cropping.thumbnail_processors.crop_corners',
+) + thumbnail_settings.THUMBNAIL_PROCESSORS

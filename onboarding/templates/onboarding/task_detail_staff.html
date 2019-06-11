@@ -53,16 +53,16 @@
 
         var elemsPicker = document.querySelector('.datepicker');
 
-        var dateInputs = document.querySelectorAll('div.date-field > input')
+        var dateInputs = document.querySelector('div.date-field > input')
         //var instancePicker = M.Datepicker.init(dateInputs, { format: "yyyy-mm-dd"});
-        var instancePicker = M.Datepicker.init(dateInputs);
         var startingDate = document.querySelector('#dateDueChangeContainer').getAttribute('data-date')
-
+        
+        var instancePicker = M.Datepicker.init(dateInputs,{defaultDate:moment(startingDate).toDate()});
         if(startingDate) {
             var momentDate = moment(startingDate).format('MMM D, YYYY')
             document.querySelector('#id_date_due').value = momentDate
+            M.Datepicker.getInstance(dateInputs).setDate(moment(startingDate).toDate())
         }
-
 
 
 

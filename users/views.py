@@ -9,7 +9,7 @@ def login_view(request):
         form = CustomAuthenticationForm(request=request,data=request.POST)
         if form.is_valid():
             login(request, form.user_cache)
-            return redirect("onboarding:onboarding_list")
+            return redirect("core:main_page")
     else:
         form = CustomAuthenticationForm()
     return render(request,'users/login.html',{'form':form})

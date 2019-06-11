@@ -1,0 +1,31 @@
+{% load cropping %}
+{% load static %}
+<div id="slide-out" class="sidenav sidenav-fixed sidenav-custom">
+    <div class="white-text sidebar-title">
+        <h4>ONBOARDING</h4>
+
+    </div>
+    <div class="sidebar-user">
+        <span>{{user.username}}</span>
+        {% if user.is_staff %}
+        <span class="badge orange white-text">ADMIN</span>
+        {% endif %}
+    </div>
+    <div>
+        <div class="sidebar-photo">
+            {% if user.profile.picture %}
+            <img src="{% cropped_thumbnail user.profile 'cropping' scale=0.5 %}">
+            {% else %}
+            <img src="{% static 'img/profile.png' %}" alt="" class="">
+            {% endif %}
+        </div>
+    </div>
+    <ul>
+        <li><a href="{% url 'core:main_page' %}" class="custom-a">Home</a></li>
+        <li><a href="{% url 'onboarding:onboarding_list' %}" class="custom-a">Onboardings</a></li>
+        <li><a href="{% url 'onboarding:task_list' %}" class="custom-a">Tasks</a></li>
+        <li><a href="#!" class="custom-a">Account Settings</a></li>
+        <li><a href="#!" class="custom-a">Coworkers</a></li>
+        <li><a href="{% url 'admin:index' %}" class="custom-a">Admin</a></li>
+    </ul>
+</div>

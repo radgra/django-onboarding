@@ -52,7 +52,7 @@
                     {% for on_task in paginated  %}
                     {% class_for_state on_task as the_class %}
 
-                    {% url 'onboarding:task_detail' on_task.onboarding.id on_task.id as target_url %}
+                    {% url 'onboarding:task_detail' on_task.onboarding.id on_task.task.id as target_url %}
                     <tr onclick="window.location='{{ target_url }}'" style="cursor:pointer;">
                         <td>
                             <span class="badge {{the_class}}">

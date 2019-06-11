@@ -1,14 +1,42 @@
+{% load cropping %}
+{% load static %}
+
 {% if user.is_authenticated %}
 <nav class="white">
-    <div class="nav-wrapper">
-        
-        
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="sass.html">Sass</a></li>
-            <li><a href="badges.html">Components</a></li>
-            <li><a href="{% url 'users:logout_view' %}">Logout</a></li>
-        </ul>
-        
+  <div class="nav-wrapper">
+    <div class="menu-nav-container">
+      <div class="nav-bread">
+        <a href="#!" class="breadcrumb">First</a>
+        <a href="#!" class="breadcrumb">Second</a>
+        <a href="#!" class="breadcrumb">Third</a>
+      </div>
+      <div class="menu-container">
+        {% if user.is_authenticated %}
+        <div class="profile-image-box">
+          {% if user.profile.picture %}
+          <img src="{% cropped_thumbnail user.profile 'cropping' scale=0.2 %}" class="circle">
+          {% else %}
+          <img src="{% static 'img/profile.png' %}" alt="" class="circle">
+          {% endif %}
+          <span class="grey-text">
+            {{user.username}}
+          </span>
+        </div>
+        <div class="icons-profile-container">
+          <div class="single-icon-box">
+            <a href="{% url 'users:logout_view'%}">
+              <i class="material-icons grey-text">power_settings_new</i>
+              <span class="grey-text profile-icon-text">Log Out</span>
+            </a>
+          </div>
+          <div clasS="single-icon-box">
+            <i class="material-icons grey-text">settings</i>
+            <span class="grey-text profile-icon-text">Settings</span>
+          </div>
+        </div>
+        {% endif %}
+      </div>
     </div>
+  </div>
 </nav>
 {% endif %}

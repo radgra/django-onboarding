@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.contrib.auth import get_user_model
+from image_cropping import ImageRatioField
 
 class CustomUser(AbstractUser):
     # add additional fields in here
@@ -21,7 +22,9 @@ class Profile(models.Model):
     email = models.EmailField(null=True) #iwerken email ,  same as previous one
     user = models.OneToOneField(get_user_model(),null=True,blank=True, on_delete=models.CASCADE)
     # gender choices field
+    picture = models.ImageField(upload_to="profile_pics", null=True, blank=True)
     gender = models.CharField(max_length=2, choices=GENDER_CHOICES, default=MALE)
+    cropping = ImageRatioField('picture', '300x300')
 
     @property
     def fullname(self):
