@@ -28,7 +28,7 @@ DEBUG = True
 SHORT_DATE_FORMAT = 'Y/m/d'
 # For system
 DATE_FORMAT = 'Y-m-d'
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['safe-shelf-21477.herokuapp.com',]
 
 LOGIN_URL = '/users/login/'
 
