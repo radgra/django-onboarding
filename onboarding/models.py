@@ -58,10 +58,10 @@ class OnboardingTasks(models.Model):
     PROCCESSED = 'PR'
     NOT_NECESSARY = 'NC'
     STATE_CHOICES = (
-        (COMPLETED,'Erledigt'),
-        (OPEN,'Offen'),
-        (PROCCESSED,'In Bearbeitung'),
-        (NOT_NECESSARY,'Nicht Notwendig'),
+        (COMPLETED,'Completed'),
+        (OPEN,'Open'),
+        (PROCCESSED,'Processed'),
+        (NOT_NECESSARY,'Not necessary'),
     )
     task = models.ForeignKey('tasks.Task',on_delete=models.CASCADE)
     position = models.PositiveIntegerField()

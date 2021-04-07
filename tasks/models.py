@@ -9,12 +9,12 @@ class Task(models.Model):
     FIRST_WORK_DAY ='FR'
     AFTER_FIRST_WORK_DAY = 'AF'
     DATE_DUE_CHOICES = (
-        (AFTER_INFO,'Bei Info'),
-        (AFTER_SIGNING,'Nach Unterzeichung'),
-        (PREPARATION,'Zur Vorbereitung'),
-        (BEFORE_START_WORK,'Kurz vor Beginn'),
-        (FIRST_WORK_DAY,'Zum 1. Arbeitstag'),
-        (AFTER_FIRST_WORK_DAY,'Nach 1. Arbeitstag')
+        (AFTER_INFO,'After Info'),
+        (AFTER_SIGNING,'After Signing'),
+        (PREPARATION,'Preparation'),
+        (BEFORE_START_WORK,'Before Work Start'),
+        (FIRST_WORK_DAY,'First Day of Work'),
+        (AFTER_FIRST_WORK_DAY,'After First Day of Work')
     )
     category = models.ForeignKey('TaskCategory',on_delete=models.CASCADE)
     title = models.CharField(max_length=255,unique=True)

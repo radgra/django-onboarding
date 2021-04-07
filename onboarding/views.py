@@ -3,7 +3,7 @@ from .models import Onboarding, OnboardingTasks
 from tasks.models import Task
 from django.shortcuts import get_object_or_404
 from .filters import OnboardingTasksFilter, TaskDetailFilter
-from .forms import OnboardingTasksUpdateForm, OnboardingCreateForm, NewEmployeeForm, ProfileForm, TaskAssignPersonForm, TaskUpdateDateDueForm, TaskUpdateStateForm
+from .forms import OnboardingTasksUpdateForm, OnboardingCreateForm, NewEmployeeForm, ProfileForm, TaskAssignPersonForm, TaskUpdateDateDueForm, TaskUpdateStateForm, OnboardingTemplateForm
 from django.utils.dateparse import parse_datetime
 from django.db import transaction
 from core.models import OnboardingTemplate
@@ -123,7 +123,8 @@ def onboarding_create(request):
         form1 = OnboardingCreateForm(request.POST)
         form2 = NewEmployeeForm(request.POST)
         form3 = ProfileForm(request.POST)
-        if form1.is_valid() and form2.is_valid() and form3.is_valid():
+        form4 = OnboardingTemplateForm(request.POST)
+        if form1.is_valid() and form2.is_valid() and form3.is_valid() and form4.is_valid():
             with transaction.atomic():
                 new_onboarding = form1.save()
                 new_profile = form3.save()
@@ -132,8 +133,9 @@ def onboarding_create(request):
                 new_employee.profile = new_profile
                 new_employee.save()
                 # Using Default Template
-                def_template = OnboardingTemplate.objects.get(title='Default')
-                for task_temp in def_template.templatetasks_set.all():
+                template = form4.cleaned_data['templates']
+                # template = OnboardingTemplate.objects.get(title='Default')
+                for task_temp in template.templatetasks_set.all():
                     OnboardingTasks.objects.create(task=task_temp.task,onboarding=new_onboarding,position=task_temp.position)
                 messages.success(request, 'Onboarding created!')
                 return redirect("onboarding:onboarding_list")
@@ -144,11 +146,12 @@ def onboarding_create(request):
         form1 = OnboardingCreateForm()
         form2 = NewEmployeeForm()
         form3 = ProfileForm()
-    
+        form4 = OnboardingTemplateForm()
     context = {
         'form1':form1,
         'form2':form2,
         'form3':form3,
+        'form4':form4,
         'title':'Add Onboarding'
     }
 

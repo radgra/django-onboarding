@@ -79,3 +79,15 @@ class TaskAssignPersonForm(forms.ModelForm):
     class Meta:
         model = OnboardingTasks
         fields = ('assigned_to',)
+
+class TaskAssignPersonForm(forms.ModelForm):
+    class Meta:
+        model = OnboardingTasks
+        fields = ('assigned_to',)
+
+class OnboardingTemplateForm(forms.Form):
+    templates = forms.ModelChoiceField(queryset=OnboardingTemplate.objects.all(),required=True)
+
+    # class Meta:
+    #     model = OnboardingTemplate
+    #     fields = ('title',)

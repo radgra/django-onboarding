@@ -127,6 +127,17 @@
 
             </div>
             <div class="row">
+                <div class="col s6 input-field">
+                    {{form4.templates}}
+                    {{form4.templates.label_tag}}
+                    {% if form4.templates.errors %}
+                    <span class="helper-text red-text">
+                        {{form4.templates.errors.as_text}}
+                    </span>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row">
                 <div class="col s12">
                     <button class="waves-effect waves-light btn m-20" type="submit">Submit Form</button>
                 </div>
@@ -144,5 +155,12 @@
             el.type = "text"
         }
     }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var elems = document.querySelectorAll('select');
+        var instances = M.FormSelect.init(elems);
+        document.getElementById('id_templates').removeAttribute('required')
+    })
+
 </script>
 {% endblock scripts %}
