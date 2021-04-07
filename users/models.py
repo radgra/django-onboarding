@@ -21,7 +21,7 @@ class Profile(models.Model):
     short_code = models.CharField(max_length=3,null=True, unique=True) # cool - allow null but doesnt allow blank on staff form(not new mitarbeiter)
     email = models.EmailField(null=True) #iwerken email ,  same as previous one
     user = models.OneToOneField(get_user_model(),null=True,blank=True, on_delete=models.CASCADE)
-    # gender choices field
+    # gender choices fields
     picture = models.ImageField(upload_to="profile_pics", null=True, blank=True)
     gender = models.CharField(max_length=2, choices=GENDER_CHOICES, default=MALE)
     cropping = ImageRatioField('picture', '300x300')
