@@ -9,7 +9,7 @@ class Task(models.Model):
     FIRST_WORK_DAY ='FR'
     AFTER_FIRST_WORK_DAY = 'AF'
     DATE_DUE_CHOICES = (
-        (AFTER_INFO,'After Info'),
+        (AFTER_INFO,'Info'),
         (AFTER_SIGNING,'After Signing'),
         (PREPARATION,'Preparation'),
         (BEFORE_START_WORK,'Before Work Start'),

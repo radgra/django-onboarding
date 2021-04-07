@@ -30,7 +30,8 @@ def main_page(request):
         'active_onboardings':active_onboardings,
         'past_due_tasks':past_due_tasks,
         'tasks_due_week':tasks_due_week,
-        'task_updated_last_week':task_updated_last_week
+        'task_updated_last_week':task_updated_last_week,
+        'today':today
     }
     return render(request,'core/main.html',context)
 
