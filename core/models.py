@@ -1,7 +1,6 @@
 from django.db import models
 
 
-# this feature will be added later
 class OnboardingTemplate(models.Model):
     title = models.CharField(max_length=255,unique=True)
     description = models.TextField(null=True,blank=True)

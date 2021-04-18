@@ -111,8 +111,7 @@ class Command(BaseCommand):
         default_template = OnboardingTemplate.objects.create(title="Default")
 
         for task in created_tasks:
-            print(task)
-            print(task['task_obj'].date_due)
+
             TemplateTasks.objects.create(onboardingTemplate=default_template, position=task['position'], task=task['task_obj'])
 
 

@@ -37,7 +37,6 @@ class OnboardingAdmin(admin.ModelAdmin):
         return super().get_form(request, obj, **kwargs)
 
     def save_form(self, request, form, change):
-        print(form)
         return super().save_form(request, form, change)   
 
     def save_model(self, request, obj, form, change):

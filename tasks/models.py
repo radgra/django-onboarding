@@ -19,7 +19,7 @@ class Task(models.Model):
     category = models.ForeignKey('TaskCategory',on_delete=models.CASCADE)
     title = models.CharField(max_length=255,unique=True)
     description = models.TextField(null=True,blank=True)
-    date_due = models.CharField(max_length=2, choices=DATE_DUE_CHOICES,default=BEFORE_START_WORK) #later - automatic dynamic date assignment for exmaple 2 days beffore/after x(arbeitstart)
+    date_due = models.CharField(max_length=2, choices=DATE_DUE_CHOICES,default=BEFORE_START_WORK)
 
     def __str__(self):
         return self.title

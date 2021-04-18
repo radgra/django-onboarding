@@ -69,9 +69,9 @@ class OnboardingTasks(models.Model):
     state = models.CharField(max_length=2,choices=STATE_CHOICES,default=OPEN)
     assigned_to = models.ForeignKey(get_user_model(),on_delete=models.CASCADE,related_name="assigned_tasks",blank=True,null=True)
     last_updated = models.DateTimeField(auto_now=True)
-    last_updated_by = models.ForeignKey(get_user_model(),on_delete=models.CASCADE,related_name="last_updated_tasks", null=True,blank=True) # moze all status changes in additional table
+    last_updated_by = models.ForeignKey(get_user_model(),on_delete=models.CASCADE,related_name="last_updated_tasks", null=True,blank=True) 
     date_due = models.DateField(null=True,blank=True)
-    description = models.TextField(null=True,blank=True) # additional description added to task inheritance pattern with M2M and blueprint !!!
+    description = models.TextField(null=True,blank=True) 
     # later add notes feature - notes from workes about this task - only assigned and supervisor
 
     class Meta:
