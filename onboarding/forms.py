@@ -17,14 +17,8 @@ class OnboardingAdminForm(forms.ModelForm):
         fields = ('entry_date','trial_period','template')
     
     def save(self, commit=True):
-        # print(self)
         new_obj = super().save(commit=commit)
         template = self.cleaned_data.get('template',None)
-        # if template:
-        #     # copy all tasks with position to taskstemplate
-        #     print(template)
-        #     for task_temp in template.templatetasks_set.all():
-        #        OnboardingTasks.create(task=task_temp.task,onbarding=new_obj,position=task_temp.position)
         return new_obj
 
 

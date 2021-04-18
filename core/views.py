@@ -7,23 +7,13 @@ from django.db.models import Q
 
 @login_required
 def main_page(request):
-    # MAKE THIS LOGIC REUSABLE ON MODEL !!!!!!!!!!
-    # onboarding which entry date < today
-    # task where status not completed and date.due > today
-    # task due in one week(7 days) - later change this dynamically with filter
-    # task updated > today-7days
     if not request.user.is_staff:
         return main_page_user(request)
 
-
     today = timezone.now()
     active_onboardings = Onboarding.objects.filter(entry_date__gte=today)
-    #status not commpleted
-    #tasks to complete
     past_due_tasks = OnboardingTasks.objects.filter(Q(state='ST') | Q(state='PR'), date_due__lt=today)[:10]
-    
-    tasks_due_week = OnboardingTasks.objects.filter(date_due__lt=today + datetime.timedelta(days=7),date_due__gte=today)[:10]
-    
+    tasks_due_week = OnboardingTasks.objects.filter(date_due__lt=today + datetime.timedelta(days=7),date_due__gte=today)[:10] 
     task_updated_last_week = OnboardingTasks.objects.filter(last_updated__lte=today).order_by('-last_updated')[:10]
 
     context = {

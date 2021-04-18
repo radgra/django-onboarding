@@ -7,7 +7,6 @@ from django.contrib.auth.forms import PasswordChangeForm
 class OnboardingTasksFilter(django_filters.FilterSet):
     state = django_filters.ChoiceFilter(empty_label="All", choices=OnboardingTasks.STATE_CHOICES)
     def __init__(self, *args, obj_pk=None, **kwargs):
-        print(self)
         super().__init__(*args, **kwargs)
         # if obj_pk:
         #     User = get_user_model()
