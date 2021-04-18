@@ -27,7 +27,7 @@ def onboarding_list(request):
 @login_required
 def onboarding_detail(request,pk):
     onboarding = get_object_or_404(Onboarding,pk=pk)
-    on_tasks_filter = OnboardingTasksFilter(request.GET,obj_pk=pk, queryset=onboarding.onboardingtasks_set.all())
+    on_tasks_filter = OnboardingTasksFilter(request.GET,obj_pk=pk, queryset=onboarding.onboardingtasks_set.all().order_by('position'))
     paginator = Paginator(on_tasks_filter.qs,20)
     page = request.GET.get('page')
     paginated = paginator.get_page(page)

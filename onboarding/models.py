@@ -20,6 +20,9 @@ class Onboarding(models.Model):
     def tasks_to_complete(self):
         return self.onboardingtasks_set.exclude(state='CM').count()
 
+    def email(self):
+        return self.newemployee.personal_email
+
     #later implement
     def days_since_due(self):
         pass
